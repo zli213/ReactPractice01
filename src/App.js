@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Container } from "@mui/material";
+import Navbar from "./components/Navbar";
+import SlideSelect from "./components/SlideSelect";
+import TenurSelect from "./components/TenureSelect";
+import Result from "./components/Result";
+import "./App.css";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <div className="mainBoday">
+        <div className="left">
+          <SlideSelect />
+          <TenurSelect />
+        </div>
+        <div className="right">
+          <Result />
+        </div>
+      </div>
     </div>
   );
 }
