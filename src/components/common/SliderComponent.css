@@ -1,0 +1,14 @@
+.SliderComponent {
+  width: 25rem;
+  height: auto;
+}
+.sliderRange {
+  display: flex;
+  justify-content: space-between;
+  color: gray;
+  font-size: 0.5rem;
+}
+.SliderComponent h3 {
+  margin: 0;
+  padding: 0;
+}
