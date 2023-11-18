@@ -12,7 +12,14 @@ const SlideSelect = ({ data, setData }) => {
         max={bank_limit}
         step={100}
         value={data.homeValue}
-        onChange={(e, value) => setData({ homeValue: value })}
+        onChange={(e, value) =>
+          setData({
+            ...data,
+            homeValue: value,
+            downPayment: value * 0.2,
+            loanAmount: value * 0.8,
+          })
+        }
         unit="$"
         amount={data.homeValue}
       />
@@ -21,9 +28,15 @@ const SlideSelect = ({ data, setData }) => {
         defaultValue={data.downPayment}
         value={data.downPayment}
         min={500}
-        max={1000}
+        max={data.homeValue}
         step={100}
-        onChange={(e, value) => setData({ downPayment: value })}
+        onChange={(e, value) =>
+          setData({
+            ...data,
+            loanAmount: data.homeValue - value,
+            downPayment: value,
+          })
+        }
         unit="$"
         amount={data.downPayment}
       />
@@ -32,11 +45,33 @@ const SlideSelect = ({ data, setData }) => {
         defaultValue={data.loanAmount}
         value={data.loanAmount}
         min={200}
-        max={1000}
+        max={data.homeValue}
         step={100}
-        onChange={(e, value) => setData({ loanAmount: value })}
+        onChange={(e, value) =>
+          setData({
+            ...data,
+            downPayment: data.homeValue - value,
+            loanAmount: value,
+          })
+        }
         unit="$"
         amount={data.loanAmount}
+      />
+      <SliderComponent
+        title="interest Rate"
+        defaultValue={data.interestRate}
+        value={data.interestRate}
+        min={2}
+        max={18}
+        step={1}
+        onChange={(e, value) =>
+          setData({
+            ...data,
+            interestRate: value,
+          })
+        }
+        unit="%"
+        amount={data.interestRate}
       />
     </div>
   );
