@@ -12,29 +12,31 @@ const SlideSelect = ({ data, setData }) => {
         max={bank_limit}
         step={100}
         value={data.homeValue}
-        onChange={(e, value) => console.log(value)}
+        onChange={(e, value) => setData({ homeValue: value })}
         unit="$"
-        amount={3000}
+        amount={data.homeValue}
       />
       <SliderComponent
         title="Down Payment"
-        defaultValue={25}
+        defaultValue={data.downPayment}
+        value={data.downPayment}
         min={500}
         max={1000}
         step={100}
-        onChange={(e, value) => console.log(value)}
+        onChange={(e, value) => setData({ downPayment: value })}
         unit="$"
-        amount={300}
+        amount={data.downPayment}
       />
       <SliderComponent
         title="Loan Amount"
-        defaultValue={25}
+        defaultValue={data.loanAmount}
+        value={data.loanAmount}
         min={200}
         max={1000}
         step={100}
-        onChange={(e, value) => console.log(value)}
+        onChange={(e, value) => setData({ loanAmount: value })}
         unit="$"
-        amount={700}
+        amount={data.loanAmount}
       />
     </div>
   );
