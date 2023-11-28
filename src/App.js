@@ -21,7 +21,7 @@ function App() {
           <TenurSelect data={data} setData={setData} />
         </div>
         <div className="right">
-          <Result />
+          <Result data={data} setData={setData} />
         </div>
       </div>
     </div>
