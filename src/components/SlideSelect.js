@@ -1,79 +1,94 @@
 import React from "react";
 import SliderComponent from "./common/SliderComponent";
+import { Box } from "@mui/material";
 
-const SlideSelect = ({ data, setData }) => {
+const SlideSelect = ({ data, setData, isSmallScreen }) => {
   const bank_limit = 10000;
+
+  const handleHomeValueChange = (_, value) => {
+    setData({
+      ...data,
+      homeValue: value,
+      downPayment: value * 0.2,
+      loanAmount: value * 0.8,
+    });
+  };
+
+  const handleDownPaymentChange = (_, value) => {
+    setData({
+      ...data,
+      downPayment: value,
+      loanAmount: data.homeValue - value,
+    });
+  };
+
+  const handleLoanAmountChange = (_, value) => {
+    setData({
+      ...data,
+      loanAmount: value,
+      downPayment: data.homeValue - value,
+    });
+  };
+
+  const handleInterestRateChange = (_, value) => {
+    setData({
+      ...data,
+      interestRate: value,
+    });
+  };
+
   return (
-    <div>
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: isSmallScreen ? "100%" : "400px",
+        margin: "0 auto",
+        "& .MuiSlider-root": {
+          mb: isSmallScreen ? 2 : 3,
+        },
+      }}
+    >
       <SliderComponent
         title="Home Value"
-        defaultValue={data.homeValue}
         min={1000}
         max={bank_limit}
         step={100}
         value={data.homeValue}
-        onChange={(e, value) =>
-          setData({
-            ...data,
-            homeValue: value,
-            downPayment: value * 0.2,
-            loanAmount: value * 0.8,
-          })
-        }
+        onChange={handleHomeValueChange}
         unit="$"
         amount={data.homeValue}
       />
       <SliderComponent
         title="Down Payment"
-        defaultValue={data.downPayment}
-        value={data.downPayment}
-        min={500}
+        min={0}
         max={data.homeValue}
         step={100}
-        onChange={(e, value) =>
-          setData({
-            ...data,
-            loanAmount: data.homeValue - value,
-            downPayment: value,
-          })
-        }
+        value={data.downPayment}
+        onChange={handleDownPaymentChange}
         unit="$"
         amount={data.downPayment}
       />
       <SliderComponent
         title="Loan Amount"
-        defaultValue={data.loanAmount}
-        value={data.loanAmount}
-        min={200}
+        min={0}
         max={data.homeValue}
         step={100}
-        onChange={(e, value) =>
-          setData({
-            ...data,
-            downPayment: data.homeValue - value,
-            loanAmount: value,
-          })
-        }
+        value={data.loanAmount}
+        onChange={handleLoanAmountChange}
         unit="$"
         amount={data.loanAmount}
       />
       <SliderComponent
-        title="interest Rate"
-        defaultValue={data.interestRate}
-        value={data.interestRate}
+        title="Interest Rate"
         min={2}
         max={18}
-        step={1}
-        onChange={(e, value) =>
-          setData({
-            ...data,
-            interestRate: value,
-          })
-        }
+        step={0.1}
+        value={data.interestRate}
+        onChange={handleInterestRateChange}
         unit="%"
         amount={data.interestRate}
       />
-    </div>
+    </Box>
   );
 };
 

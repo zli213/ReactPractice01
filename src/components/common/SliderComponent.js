@@ -20,7 +20,6 @@ const SliderComponent = ({
         {amount}
       </h3>
       <Slider
-        defaultValue={defaultValue}
         min={min}
         max={max}
         marks
