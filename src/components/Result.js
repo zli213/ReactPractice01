@@ -4,7 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Result = ({ data }) => {
+const Result = ({ data, isSmallScreen }) => {
   const { homeValue, downPayment, loanAmount, loanTerm, interestRate } = data;
   const totalLoadMonths = loanTerm * 12;
   const monthlyInterestRate = interestRate / 100 / 12;
@@ -26,7 +26,12 @@ const Result = ({ data }) => {
     ],
   };
   return (
-    <Stack>
+    <Stack
+      height="65vh"
+      justifyContent={isSmallScreen ? "space-start" : "space-between"}
+      alignItems="center"
+      p={2}
+    >
       <Typography textAlign="center" variant="h5">
         Monthly Payment: ${monthlyPayment.toFixed(2)}
       </Typography>
